@@ -2,6 +2,11 @@
 #define EVENT_H
 #include <string>
 using namespace std;
+
+int amountofDays(int, int, int);
+int importanceLevel(int, string);
+
+
 class Event{
   private:
     struct ListNode{
@@ -73,4 +78,5 @@ class Event{
     
   
 };
+
 #endif
