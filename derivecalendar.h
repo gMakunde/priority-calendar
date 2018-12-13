@@ -46,11 +46,11 @@ class Birthday : public Calendar {
   private:
     int age;
   public:
-    Assignment(){
+    Birthday(){
       age = 0;
     }
 
-    Assignment(int s){
+    Birthday(int s){
       age = s;
     }
 
