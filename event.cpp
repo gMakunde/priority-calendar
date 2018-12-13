@@ -11,7 +11,7 @@ void todo(){
 }
 void prioritzer(){
   int fm, fd, fy, counter;
-  int month, day, year, imp;
+  int month, day, year, imp, daysLeft;
   string Type, name, attribute;
   Assignment a;
   Holiday h;
@@ -40,32 +40,75 @@ void prioritzer(){
         cin >> size;
         for(int i=0; i<size; i++){
           file >> name >> Type >> fm >> fd >> fy >> attribute;
-          Calendar(name,Type,fm,fd,fy);
           if (Type == "Holiday" || Type == "holiday" || Type == "h"){
             h.setFestivity(attribute);
+            h.setName(name);
+            h.setType(Type);
+            h.setMonth(fm);
+            h.setDay(fd);
+            h.setYear(fy);
+            daysLeft = amountofDays(month, day, year, h.getMonth(), h.getDay(), h.getYear(), 0);
+            imp = importanceLevel(daysLeft, h.getType());
+            list.insert(h.getName(), h.getType(), imp, daysLeft, h.getFestivity());
           }
           else if(Type == "Test" || Type == "test" || Type == "t"){
             t.setSubject(attribute);
+            t.setName(name);
+            t.setType(Type);
+            t.setMonth(fm);
+            t.setDay(fd);
+            t.setYear(fy);
+            daysLeft = amountofDays(month, day, year, t.getMonth(), t.getDay(), t.getYear(), 0);
+            imp = importanceLevel(daysLeft, t.getType());
+            list.insert(t.getName(), t.getType(), imp, daysLeft, t.getSubject());
           }
           else if(Type == "Assignment" || Type == "assignment" || Type == "a"){
             a.setSubject(attribute);
+            a.setName(name);
+            a.setType(Type);
+            a.setMonth(fm);
+            a.setDay(fd);
+            a.setYear(fy);
+            daysLeft = amountofDays(month, day, year, a.getMonth(), a.getDay(), a.getYear(), 0);
+            imp = importanceLevel(daysLeft, a.getType());
+            list.insert(h.getName(), a.getType(), imp, daysLeft, a.getSubject());
           }
           else if(Type == "meeting" || Type == "Meeting" || Type== "m"){
             m.setGroup(attribute);
+            m.setName(name);
+            m.setType(Type);
+            m.setMonth(fm);
+            m.setDay(fd);
+            m.setYear(fy);
+            daysLeft = amountofDays(month, day, year, m.getMonth(), m.getDay(), m.getYear(), 0);
+            imp = importanceLevel(daysLeft, m.getType());
+            list.insert(m.getName(), m.getType(), imp, daysLeft, m.getGroup());
           }
           else if(Type == "errand" || Type == "Errand" || Type == "e"){
             e.setType(attribute);
+            e.setName(name);
+            e.setType(Type);
+            e.setMonth(fm);
+            e.setDay(fd);
+            e.setYear(fy);
+            daysLeft = amountofDays(month, day, year, e.getMonth(), e.getDay(), e.getYear(), 0);
+            imp = importanceLevel(daysLeft, e.getType());
+            list.insert(e.getName(), e.getType(), imp, daysLeft, e.getTypee());
           }
           else if(Type == "Birthday" || Type == "birthday" || Type == "b"){
             b.setAge(attribute);
+            b.setName(name);
+            b.setType(Type);
+            b.setMonth(fm);
+            b.setDay(fd);
+            b.setYear(fy);
+            daysLeft = amountofDays(month, day, year, b.getMonth(), b.getDay(), b.getYear(), 0);
+            imp = importanceLevel(daysLeft, b.getType());
+            list.insert(b.getName(), b.getType(), imp, daysLeft, b.getAge());
           }
-          //daysLeft = amountofDays(month, day, year, fm, fd, fy, 0);
-          //imp = importanceLevel(daysLeft, Type);
-          //list.insert(name, Type, imp, daysLeft, attribute);
-        }
       }
       file.close();
-
+      }
     }else{
       cout << "What is the name of the event: " << endl;
       cin.ignore();
@@ -81,66 +124,50 @@ void prioritzer(){
         cout << "Enter Holiday Festivity"<< endl;;
         cin.ignore();
         getline(cin, attribute);
+        h.setFestivity(attribute);
           }
       else if(Type == "Test" || Type == "test" || Type == "t"){
         cout << "Enter Test Subject"<< endl;;
         cin.ignore();
         getline(cin, attribute);
+        t.setSubject(attribute);
       }
       else if(Type == "Assignment" || Type == "assignment" || Type == "a"){
         cout << "Enter Subject of Assignment"<< endl;;
         cin.ignore();
         getline(cin, attribute);
+        a.setSubject(attribute);
       }
       else if(Type == "meeting" || Type == "Meeting" || Type== "m"){
         cout << "Enter Group you are meeting with"<< endl;;
         cin.ignore();
         getline(cin, attribute);
+        m.setGroup(attribute);
       }
       else if(Type == "errand" || Type == "Errand" || Type == "e"){
         cout << "Enter Type of Errand" << endl;
         cin.ignore();
         getline(cin, attribute);
+        e.setType(attribute);
       }
       else if(Type == "Birthday" || Type == "birthday" || Type == "b"){
         cout << "Enter Age they/you are turning"<< endl;;
         cin.ignore();
         getline(cin, attribute);
+        b.setAge(attribute);
       }
-      cout << "check check" << endl;
-      CalcImportanceandInsert(month, day, year, fm, fd, fy, name, Type, attribute);
-      
+      daysLeft = amountofDays(month, day, year, fm, fd, fy, 0);
+      imp = importanceLevel(daysLeft, Type);
+      list.insertNode(name, Type, imp, daysLeft, attribute);
     }
     cout << "Enter another event? (y/n)" << endl;
     cin >> yesno;
   }
   cout << endl << endl << "YOUR PRIORITY LIST:" << endl;
   list.displayList();
-  string value1, value2;
-  int value3, value4;
+  list.fileoNode();
 }
 
-void CalcImportanceandInsert(int month, int day, int year, int fm, int fd, int fy, string name, string Type, string attribute){
-  Assignment a;
-  Holiday h;
-  Birthday b;
-  Meeting m;
-  Test t;
-  Errand e;
-  Calendar c;
-  Eventlist list;
-  int daysLeft, imp;
-  
-  //Calendar(name, Type, fm, fd, fy);
-  daysLeft = amountofDays(month, day, year, fm, fd, fy, 0);
-  cout << "check2" << endl;
-  imp = importanceLevel(daysLeft, Type);
-  cout<<"importance:" << imp << endl;
-  cout << "check3" << endl;
-  list.insertNode(name, Type, imp, daysLeft, attribute);
-  cout << "check4" << endl;
-
-}
 int importanceLevel(int daysL, string TypeofEvent){
   int importance;
   if(TypeofEvent == "Test" || TypeofEvent == "test" || TypeofEvent == "t"){
