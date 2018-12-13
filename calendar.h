@@ -12,7 +12,7 @@ class Calendar{
       name = " ";
     }
     
-    Calendar(String n){
+    Calendar(string n){
       name = n;
     }
 
@@ -20,6 +20,6 @@ class Calendar{
       {name = n;}
 
     string getName() const
-      {return name}
+      {return name;}
 };
 #endif
