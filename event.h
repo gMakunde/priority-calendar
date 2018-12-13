@@ -5,11 +5,12 @@ using namespace std;
 
 int amountofDays(int, int, int, int, int, int, int);
 int importanceLevel(int, string);
+void prioritzer();
 
 class Eventlist{
   private:
     struct ListNode{
-      string Type, name;
+      string Type, name, eventAtrribute;
       int importance;
       int days;
       struct ListNode *next;
@@ -24,10 +25,10 @@ class Eventlist{
       newnode.importance = imp;
       newnode.days = days;
     }
-    void insert(string name, string type, int imp, int days){
+    void insert(string name, string type, int imp, int days, string ea){
       ListNode *newnode;
       newnode = new ListNode;
-      newnode->name = name, newnode->Type = type, newnode->importance = imp, newnode->days = days, newnode->next = nullptr;
+      newnode->name = name, newnode->Type = type, newnode->importance = imp, newnode->days = days, newnode->next, newnode->eventAtrribute = nullptr;
       ListNode *nodeptr;
       ListNode *prevNode;
       prevNode = new ListNode;
@@ -47,7 +48,7 @@ class Eventlist{
         }
 
     }
-    void insertNode(string name, string type, int imp, int days){
+    void insertNode(string name, string type, int imp, int days, string ea){
       ListNode *newnode;
      
 
@@ -56,6 +57,7 @@ class Eventlist{
       newnode->Type = type;
       newnode->importance = imp;
       newnode->days = days;
+      newnode->eventAtrribute = ea
       newnode->next = nullptr;
 
       if(!head){
@@ -82,7 +84,7 @@ class Eventlist{
 class Event{
   private:
     struct QueueNode{
-      string Type, name;
+      string Type, name, eventAtrribute;
       int importance;
       int days;
       QueueNode *next;
@@ -96,8 +98,8 @@ class Event{
 
     ~Event();
 
-    void enqueue(string, string, int, int);
-    void dequeue(string &, string &, int &, int &);
+    void enqueue(string, string, int, int, string);
+    void dequeue(string &, string &, int &, int &, string&);
     bool isEmpty() const;
     void clear();
 };
