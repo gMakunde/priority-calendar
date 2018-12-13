@@ -1,5 +1,5 @@
 #ifndef DERIVIECALENDAR_H
-#define DERVIVECALENDAR_H
+#define DERIVIVECALENDAR_H
 #include "calendar.h"
 
 class Assignment : public Calendar {
