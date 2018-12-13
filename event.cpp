@@ -5,7 +5,7 @@ using namespace std;
 
 
 int importanceLevel(int daysL, string TypeofEvent){
-  int importance = 0;
+  int importance;
   if(TypeofEvent == "Test" || TypeofEvent == "test"){
     importance = 5;
   }
@@ -20,7 +20,7 @@ int importanceLevel(int daysL, string TypeofEvent){
   }
 
   if(daysL > 30){
-    importance = 1;
+    importance = importance + 1;
   }
   if(daysL > 21 && daysL <= 30){
     importance = importance + 2;
@@ -38,16 +38,14 @@ int importanceLevel(int daysL, string TypeofEvent){
   return importance;
 }
 
-int amountofDays(int m, int d, int y){
-  int fm, fd, fy, counter;
+int amountofDays(int m, int d, int y, int fm, int fd, int fy, int counter){
   //If the day is the same as the day of the event, RETURN THE AMOUNT OF DAYS BETWEEN
-  if(fm == m && fd == d && fy == y)
+  if(fm == m && fd == d && fy == y){
     return counter;
-
+  }
   //INCREMENT THE DAY AND AMOUNT OF DAYS UNTIL THE EVENT
   d++;
   counter++;
-
   //(LEAP YEAR) CHECKS DAY ACCORDING TO MAKE SURE THE DAY RESTARTS IF REACHES OUT OF MONTH
   if(y % 4 == 0){
     if (m == 2)
@@ -82,7 +80,7 @@ int amountofDays(int m, int d, int y){
         d = 1;
       }
   }
-  return amountofDays(m, d, y);
+  return amountofDays(m, d, y, fm, fd, fy,counter);
 }
 
 Event::Event(){
@@ -126,11 +124,10 @@ void Event::dequeue(string &n, string &t, int &i, int &d){
     t = front->Type;
     i = front->importance;
     d = front->days;
-    cout << n << endl;
     temp = front;
     front = front->next;
     delete temp;
-
+    numItems -= 1;
   }
 }
 
@@ -152,3 +149,4 @@ bool Event::isEmpty() const{
   }
   return status;
 }
+
