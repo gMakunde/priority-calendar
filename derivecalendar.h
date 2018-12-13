@@ -57,7 +57,7 @@ class Birthday : public Calendar {
     void setAge(int s)
     {age = s;}
 
-    string getAge() const
+    int getAge() const
     {return age;}
 
 };
