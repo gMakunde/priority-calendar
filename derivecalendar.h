@@ -2,6 +2,7 @@
 #define DERIVECALENDAR_H
 #include "calendar.h"
 
+
 class Assignment : public Calendar {
   private:
     string subject;
@@ -44,20 +45,20 @@ class Holiday : public Calendar {
 
 class Birthday : public Calendar {
   private:
-    int age;
+    string age;
   public:
     Birthday(){
-      age = 0;
+      age = " ";
     }
 
-    Birthday(int s){
+    Birthday(string s){
       age = s;
     }
 
-    void setAge(int s)
+    void setAge(string s)
     {age = s;}
 
-    int getAge() const
+    string getAge() const
     {return age;}
 
 };
@@ -97,7 +98,7 @@ class Errand : public Calendar {
     void setType(string s)
     {type = s;}
 
-    string getSubject() const
+    string getType() const
     {return type;}
 
 };
