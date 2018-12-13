@@ -19,10 +19,12 @@ int main() {
 
 
   counter = 0;
-  cout << "What is the name of the event: " << endl;
-  cin.ignore();
-  getline(cin, name);
-  do{
+  
+  char yesno = 'y';
+  while (yesno == 'y' || yesno == 'Y'){
+    cout << "What is the name of the event: " << endl;
+    cin.ignore();
+    getline(cin, name);
     cout << "What type of event is it? (Holiday, Birthday, Assignment, Test): " << endl;
     getline(cin, Type);
 
@@ -32,20 +34,20 @@ int main() {
     cin >> fd;
     cout << "Enter the year of the event: " << endl;
     cin >> fy;
+    cout << "hi" << endl;
     daysLeft = amountofDays(month, day, year);
     imp = importanceLevel(daysLeft, Type);
-    list.insertNode(name, Type, imp, daysLeft);
+    list.enqueue(name, Type, imp, daysLeft);
 
-
-    cout << "What is the name of the event (enter '0' to exit): " << endl;
-    cin.ignore();
-    getline(cin, name);
-    //importance = importanceLevel(daysLeft, Type);
-    
-  counter = 0;
-  }while (name != "0");
-  //importance = importanceLevel(daysLeft, Type);
+    cout << "Enter another event? (y/n)" << endl;
+    cin >> yesno;
+  }
   cout << endl << endl << "YOUR PRIORITY LIST:" << endl;
-  list.displayList();
+  string value1, value2;
+  int value3, value4;
+  while (!list.isEmpty()){
+    list.dequeue(value1, value2, value3, value4);
+    cout << value1 << " " << value2 << " " << value3 << " " << value4 << endl;
+  }
 }
 
