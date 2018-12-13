@@ -84,3 +84,71 @@ int amountofDays(int m, int d, int y){
   }
   return amountofDays(m, d, y);
 }
+
+Event::Event(){
+  front = nullptr;
+  rear = nullptr;
+  numItems = 0;
+}
+
+Event::~Event(){
+  clear();
+}
+
+void Event::enqueue(string n, string t, int i, int d){
+  QueueNode *newNode = nullptr;
+
+  newNode = new QueueNode;
+  newNode->name = n;
+  newNode->importance = i;
+  newNode->Type = t;
+  newNode->days = d;
+  newNode->next = nullptr;
+
+  if(isEmpty()){
+    front = newNode;
+    rear = newNode;
+  }
+  else{
+    rear->next=newNode;
+    rear = newNode;
+  }
+  numItems++;
+}
+
+void Event::dequeue(string &n, string &t, int &i, int &d){
+  QueueNode *temp = nullptr;
+  if (isEmpty()){
+    cout << "The queue is empty" << endl;
+  }
+  else{
+    n = front->name;
+    t = front->Type;
+    i = front->importance;
+    d = front->days;
+    cout << n << endl;
+    temp = front;
+    front = front->next;
+    delete temp;
+
+  }
+}
+
+void Event::clear(){
+  string value, value2;
+  int value3, value4;
+  while(!isEmpty()){
+    dequeue(value, value2, value3, value4);
+  }
+}
+
+bool Event::isEmpty() const{
+  bool status;
+  if(numItems >0){
+    status = false;
+  }
+  else{
+    status = true;
+  }
+  return status;
+}
